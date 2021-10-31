@@ -53,7 +53,7 @@ class TodoFormView extends StatelessWidget {
                         onSubmit();
                       }
                     },
-                    child: const Text('Add Todo'),
+                    child: Text(isEdit ? 'Edit Todo' : 'Add Todo'),
                   )
                 ],
               ),
