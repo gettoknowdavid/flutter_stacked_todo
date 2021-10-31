@@ -21,7 +21,7 @@ class TodoFormView extends StatelessWidget {
   Widget build(BuildContext context) {
     return ViewModelBuilder<TodoFormViewModel>.nonReactive(
       viewModelBuilder: () => TodoFormViewModel(),
-      builder: (context, viewModel, _) {
+      builder: (context, model, _) {
         return SingleChildScrollView(
           child: Form(
             key: formKey,
@@ -33,27 +33,25 @@ class TodoFormView extends StatelessWidget {
                 children: <Widget>[
                   TextFormField(
                     initialValue: isEdit ? todo?.title : null,
-                    onChanged: viewModel.todoService.updateTitle,
-                    decoration: const InputDecoration(
-                      label: Text('Title'),
-                    ),
+                    onChanged: model.todoService.updateTitle,
+                    decoration: const InputDecoration(label: Text('Title')),
                   ),
                   const SizedBox(height: 30.0),
                   TextFormField(
                     initialValue: isEdit ? todo?.description : null,
-                    onChanged: viewModel.todoService.updateDecription,
+                    onChanged: model.todoService.updateDecription,
                     decoration: const InputDecoration(
                       label: Text('Description'),
                     ),
                   ),
                   const SizedBox(height: 60.0),
                   ElevatedButton(
+                    child: Text(isEdit ? 'Edit Todo' : 'Add Todo'),
                     onPressed: () {
-                      if (viewModel.isFormComplete) {
+                      if (model.isFormComplete) {
                         onSubmit();
                       }
                     },
-                    child: Text(isEdit ? 'Edit Todo' : 'Add Todo'),
                   )
                 ],
               ),

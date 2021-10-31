@@ -5,15 +5,13 @@ import 'package:stacked/stacked.dart';
 
 class TodoService with ReactiveServiceMixin {
   TodoService() {
-    listenToReactiveValues([_todos, _isEdit]);
+    listenToReactiveValues([_todos]);
   }
 
   final RetrofitClient _api = RetrofitClient(Dio());
   final ReactiveValue<List<Todo>> _todos = ReactiveValue<List<Todo>>([]);
-  final ReactiveValue<bool> _isEdit = ReactiveValue<bool>(false);
 
   List<Todo> get todos => _todos.value;
-  bool get isEdit => _isEdit.value;
 
   Future<List<Todo>> getTodos() async {
     _todos.value = await _api.getTodos();
@@ -37,7 +35,6 @@ class TodoService with ReactiveServiceMixin {
   }
 
   Future<Todo> editTodo(Todo todo) async {
-    _isEdit.value = true;
     _todos.value.firstWhere((e) => e.id == todo.id).copyWith(
           id: todo.id,
           title: todo.title,

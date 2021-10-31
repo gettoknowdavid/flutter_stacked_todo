@@ -14,7 +14,6 @@ class EditTodoView extends StatelessWidget {
     return ViewModelBuilder<EditTodoViewModel>.reactive(
       viewModelBuilder: () => EditTodoViewModel(),
       builder: (context, model, _) {
-
         return Scaffold(
           appBar: AppBar(title: const Text('Edit todo')),
           body: TodoFormView(
@@ -22,13 +21,12 @@ class EditTodoView extends StatelessWidget {
             formKey: model.editTodoFormKey,
             todo: todo,
             onSubmit: () {
-              final updatedTodo = Todo(
+              model.editTodo(Todo(
                 id: todo.id,
                 title: model.todoService.title!,
                 description: model.todoService.description,
                 isComplete: false,
-              );
-              model.editTodo(updatedTodo);
+              ));
               model.navigationService.popRepeated(1);
             },
           ),
