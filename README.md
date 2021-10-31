@@ -1,6 +1,6 @@
-# flutter_stacked_architecture
+# Flutter Stacked Architecture Todo App
 
-A new Flutter project.
+This is a Flutter todo application developed using the Flutter Stacked Architecture.
 
 ## Getting Started
 
